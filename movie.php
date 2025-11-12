@@ -108,7 +108,7 @@ else {
 ?>
 </p>
 
-<p><copyright>Roberto .A. Flores &copy; 2027</copyright></p>
+<p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2027</copyright></p>
 </div>
 
 </body>
