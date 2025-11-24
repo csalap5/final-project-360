@@ -1,3 +1,12 @@
+<?php
+
+if (!session_start()) {
+    die("Could not start session");
+}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
             "http://www.w3.org/TR/REC-html40/strict.dtd">
 <html>
@@ -6,9 +15,19 @@
 <style type="text/css">
 @import url(uMovies.css);
 </style>
-<style>
 
-</style>
+<script>
+
+function validateAdminForm() {
+    const pw = document.getElementById("admin-password").value;
+    if (pw.trim() === "") {
+        alert("Password cannot be empty.");
+        return false;
+    }
+    return true;
+}
+</script>
+
 </head>
 <body>
 
@@ -30,36 +49,70 @@ and <a href="directors.php" title="access directors information">directors</a>.
 
 
 <?php
-// need to start a session to track login status and create a global db password
-// this is just a filler to show admin login functionality
-// could just fully implement uploads and figure out password storage and functionality later
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $password = $_POST['admin-password'] ?? '';
-    if ($password === 'letmein') {
-        echo '<h2>Welcome, Administrator!</h2><p>You have successfully logged in.</p>';
-        echo '<form method="post" action="admin.php" enctype="multipart/form-data">';
-        echo '<label for="upload-file">Upload a file:</label> ';
-        echo '<input type="file" id="upload-file" name="upload-file"> ';
-        echo '<button type="submit" name="upload-btn">Upload</button>';
-        echo '</form>';
-    } else {
-        echo '<h2>Administrator Access</h2>';
-        echo '<p style="color:red;">Incorrect password. Try again.</p>';
-        echo '<form method="post" action="admin.php">';
-        echo '<label for="admin-password">Password:</label>';
-        echo '<input type="password" id="admin-password" name="admin-password" required>';
-        echo '<button type="submit">Login</button>';
-        echo '</form>';
-    }
-} else {
-?>
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+
+echo "
 <h2>Administrator Access</h2>
-<form method="post" action="admin.php">
-    <label for="admin-password">Password:</label>
-    <input type="password" id="admin-password" name="admin-password" required>
-    <button type="submit">Login</button>
+<form method='post' action='admin.php' onsubmit='return validateAdminForm()'>
+    <label for='admin-password'>Password:</label>
+    <input type='password' id='admin-password' name='admin-password'>
+    <button type='submit'>Login</button>
 </form>
-<?php } ?>
+";
+
+} else {
+    $password = $_POST['admin-password'] ?? '';
+    $_SESSION['admin']['password'] = $password;
+
+    try {
+    $db = new mysqli("127.0.0.1", "uMoviesAdmin", $password, "uMovies");
+
+    if ($db->connect_errno) {
+        throw new Exception("Database connection failed");
+    }
+
+} catch (mysqli_sql_exception $e) {
+    echo "<h3 style='color:black;'>Invalid administrator password.</h3>";
+    exit();
+}
+
+    if ($mysqli->connect_errno) {
+
+        echo "<h2 style='color:black;'>Incorrect Password</h2>";
+        echo "<p>The password you entered does not match the administrator account.</p>";
+
+        echo "
+        <form method='post' action='admin.php' onsubmit='return validateAdminForm()'>
+            <label for='admin-password'>Password:</label>
+            <input type='password' id='admin-password' name='admin-password'>
+            <button type='submit'>Login</button>
+        </form>
+        ";
+
+    } else {
+
+        $_SESSION['admin']['loggedin'] = true;
+
+        echo "<h2>Welcome, Administrator!</h2>";
+        echo "<p>You have successfully logged in.</p>";
+
+        echo "<h3>Upload Movie File</h3>";
+        echo '
+        <form method="post" action="upload.php" enctype="multipart/form-data">
+            <input type="file" name="upload-file" required>
+            <button type="submit">Upload</button>
+        </form>
+        ';
+
+        echo "<h3>Delete ALL Movie Information</h3>";
+        echo '
+        <form method="post" action="delete.php">
+            <button type="submit" style="color:red;">Delete All Data</button>
+        </form>
+        ';
+    }
+}
+?>
 
 <p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2027</copyright></p>
 </div>
