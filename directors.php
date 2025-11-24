@@ -25,7 +25,7 @@ Welcome to <em>uMovies</em>, your destination for information on <a href="movies
 
 <p>
 <?php
-@$directorsdb = new mysqli('localhost','uMoviesUser','anonymous','uMovies');
+@$directorsdb = new mysqli('127.0.0.1','uMoviesUser','anonymous','uMovies');
 @$directorsdb->set_charset("utf8");
 
 if ($directorsdb->connect_errno) {
