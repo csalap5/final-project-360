@@ -76,41 +76,28 @@ echo "
     exit();
 }
 
-    if ($mysqli->connect_errno) {
+    
 
-        echo "<h2 style='color:black;'>Incorrect Password</h2>";
-        echo "<p>The password you entered does not match the administrator account.</p>";
+    $_SESSION['admin']['loggedin'] = true;
 
-        echo "
-        <form method='post' action='admin.php' onsubmit='return validateAdminForm()'>
-            <label for='admin-password'>Password:</label>
-            <input type='password' id='admin-password' name='admin-password'>
-            <button type='submit'>Login</button>
-        </form>
-        ";
+    echo "<h2>Welcome, Administrator!</h2>";
+    echo "<p>You have successfully logged in.</p>";
 
-    } else {
+    echo "<h3>Upload Movie File</h3>";
+    echo '
+    <form method="post" action="upload.php" enctype="multipart/form-data">
+        <input type="file" name="upload-file" required>
+        <button type="submit">Upload</button>
+    </form>
+    ';
 
-        $_SESSION['admin']['loggedin'] = true;
-
-        echo "<h2>Welcome, Administrator!</h2>";
-        echo "<p>You have successfully logged in.</p>";
-
-        echo "<h3>Upload Movie File</h3>";
-        echo '
-        <form method="post" action="upload.php" enctype="multipart/form-data">
-            <input type="file" name="upload-file" required>
-            <button type="submit">Upload</button>
-        </form>
-        ';
-
-        echo "<h3>Delete ALL Movie Information</h3>";
-        echo '
-        <form method="post" action="delete.php">
-            <button type="submit" style="color:red;">Delete All Data</button>
-        </form>
-        ';
-    }
+    echo "<h3>Delete ALL Movie Information</h3>";
+    echo '
+    <form method="post" action="delete.php">
+        <button type="submit" style="color:red;">Delete All Data</button>
+    </form>
+    ';
+    
 }
 ?>
 
