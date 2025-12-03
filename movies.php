@@ -72,7 +72,7 @@ else {
 ?>
 </p>
 
-<p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2027</copyright></p>
+<p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2025</copyright></p>
 </div>
 
 </body>
