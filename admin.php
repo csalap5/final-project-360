@@ -75,9 +75,7 @@ echo "
     echo "<h3 style='color:black;'>Invalid administrator password.</h3>";
     exit();
 }
-
-    
-
+ 
     $_SESSION['admin']['loggedin'] = true;
 
     echo "<h2>Welcome, Administrator!</h2>";
