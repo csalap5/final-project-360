@@ -36,7 +36,7 @@ foreach ($lines as $line) {
         $title = $parts[1];
         $year = $parts[2];
 
-        $stmt = $db->prepare("INSERT IGNORE INTO movies (movie, year) VALUES (?,?)");
+        $stmt = $db->prepare("INSERT IGNORE INTO movies (name, year) VALUES (?,?)");
         $stmt->bind_param("ss", $title, $year);
         $stmt->execute();
 
