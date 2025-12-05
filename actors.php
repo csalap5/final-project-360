@@ -55,13 +55,13 @@ else {
     }
     else {
         for ($i=0; $i<$rows; $i++) {
-            $row = $result->fetch_assoc();
-            echo "<tr class=\"highlight\">";
-            echo "<td>".($i+1)."</td>";
-            echo "<td><a href=\"movie.php?name=".$row['name']."\" />".$row['name']."</a></td>";
-            echo"<td>".$row['gender']."</td>";
-            echo "</tr>\n";
-        }
+    $row = $result->fetch_assoc();
+    echo "<tr class=\"highlight\">";
+    echo "<td>".($i+1)."</td>";
+    echo "<td><a href=\"actor.php?name=".urlencode($row['name'])."\">".$row['name']."</a></td>";
+    echo "<td>".$row['gender']."</td>";
+    echo "</tr>\n";
+}
     }
     echo "</table>\n";
 
