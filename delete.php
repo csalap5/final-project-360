@@ -43,7 +43,7 @@ Welcome to <em>uMovies</em>, your destination for information on <a href="movies
 <h3>All data deleted!</h3>
 
 <form action="admin.php" method="get">
-    <button type="submit">Back to Administrator Menu</button>
+    <button type="submit" style="cursor: pointer;">Back to Administrator Menu</button>
 </form>
 
 <p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2025</copyright></p>

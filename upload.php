@@ -103,17 +103,17 @@ Welcome to <em>uMovies</em>, your destination for information on <a href="movies
 <h3>Uploading Data File</h3>
 
 <ul>
-    <li>Added <?= $movieAdd ?> movies out of <?= $movieTotal ?> movie records (<?= $movieTotal - $movieAdd ?> failures)<?= htmlspecialchars($movie) ?></li>
-    <li>Added <?= $actorAdd ?> actors out of <?= $actorTotal ?> actor records (<?= $actorTotal - $actorAdd ?> failures)<?= htmlspecialchars($name) ?></li>
-    <li>Added <?= $directorAdd ?> directors out of <?= $directorTotal ?> director records (<?= $directorTotal - $directorAdd ?> failures)<?= htmlspecialchars($dname) ?></li>
-    <li>Added <?= $directionAdd ?> directions out of <?= $directorTotal ?> movie/director records (<?= $directorTotal - $directionAdd ?> failures)<?= htmlspecialchars($movie) ?>
-    /<?= htmlspecialchars($dname) ?></li>
-    <li>Added <?= $performanceAdd ?> performances out of <?= $actorTotal ?> actor/movie/role records (<?= $actorTotal - $performanceAdd ?> failures)<?= htmlspecialchars($movie) ?>
-    /<?= htmlspecialchars($name) ?>/<?= htmlspecialchars($role) ?></li>
+    <li>Added <?= $movieAdd ?> movies out of <?= $movieTotal ?> movie records (<?= $movieTotal - $movieAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($movie)) ?>]</li>
+    <li>Added <?= $actorAdd ?> actors out of <?= $actorTotal ?> actor records (<?= $actorTotal - $actorAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($name)) ?>]</li>
+    <li>Added <?= $directorAdd ?> directors out of <?= $directorTotal ?> director records (<?= $directorTotal - $directorAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($dname)) ?>]</li>
+    <li>Added <?= $directionAdd ?> directions out of <?= $directorTotal ?> movie/director records (<?= $directorTotal - $directionAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($movie)) ?>
+    /<?= htmlspecialchars(rtrim($dname)) ?>]</li>
+    <li>Added <?= $performanceAdd ?> performances out of <?= $actorTotal ?> actor/movie/role records (<?= $actorTotal - $performanceAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($movie)) ?>
+    /<?=htmlspecialchars(rtrim($name))?>/<?= htmlspecialchars(rtrim($role)) ?>]</li>
 </ul>
 
 <form action="admin.php" method="get">
-    <button type="submit">Back to Administrator Menu</button>
+    <button type="submit" style="cursor: pointer;">Back to Administrator Menu</button>
 </form>
 
 <p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2025</copyright></p>
