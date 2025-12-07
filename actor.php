@@ -74,7 +74,7 @@ else {
                 $row = $result->fetch_assoc();
                 echo "<tr class=\"highlight\">";
                 echo "<td>".($i+1)."</td>";
-                echo "<td><a href=\"actor.php?name=".$row['actor']."\" />".$row['movie']."</a></td>";
+                echo "<td><a href=\"movie.php?name=".$row['movie']."\" />".$row['movie']."</a></td>";
                 echo "<td>".$row['role']."</td>";
                 echo "</tr>\n";
             }
