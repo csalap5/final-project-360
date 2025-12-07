@@ -52,7 +52,7 @@ else {
         echo "<table class=\"uMovies\">\n";
         echo "<tr>\n";
         echo "<th></th>";
-        echo "<th><a href=\"director.php?name=".$movie['name']."&order=name\">Name</a></th>";
+        echo "<th>Name</th>";
         echo "<tr>\n";
 
         $select = 'select * from directed_by where director="'.$director['name'].'"';
