@@ -50,14 +50,6 @@ function copyFileNameToTextInput() {
 
 <div id="content">
 
-<?php
-// Display a success message from upload/delete
-if (isset($_SESSION['admin']['message'])) {
-    echo "<h3 style='color:green;'>" . $_SESSION['admin']['message'] . "</h3>";
-    unset($_SESSION['admin']['message']);
-}
-?>
-
 <h1>uMovies&trade;</h1>
 <p>
 Welcome to <em>uMovies</em>, your destination for information on <a href="movies.php" title="access movies information">movies</a>, <a href="actors.php" title="access actors information">actors</a> and <a href="directors.php" title="access directors information">directors</a>.
@@ -107,14 +99,34 @@ else {
 
 <h3>Upload Movie File</h3>
 <form method="post" action="upload.php" enctype="multipart/form-data">
-    <input type="file" id="upload-file" name="upload-file" required onchange="copyFileNameToTextInput()">
-    <input type="text" id="movie-file-name" name="movie-file-name" placeholder="Enter movie file path" required>
-    <button type="submit">Upload</button>
+
+    <label>Data File:</label>
+    <input 
+        type="text" 
+        id="movie-file-name" 
+        name="movie-file-name" 
+        placeholder="Enter file name" 
+        required
+    >
+     <label for="upload-file" style="cursor: pointer;">
+        <button type="button" style="cursor: pointer;" onclick="document.getElementById('upload-file').click(); return false;">
+            Choose File
+        </button>
+    </label>
+    <input 
+        type="file" 
+        id="upload-file" 
+        name="upload-file" 
+        required
+        onchange="copyFileNameToTextInput()"
+        style="display: none;"
+    >
+    <button type="submit" style="cursor: pointer;">Upload</button>
 </form>
 
 <h3>Delete All Movie Information</h3>
 <form method="post" action="delete.php" onsubmit="return confirm('Are you sure you want to delete all movie information?')">
-    <button type="submit" style="color:red;">Delete All Data</button>
+    <button type="submit" style="color:red; cursor: pointer;">Delete All Data</button>
 </form>
 
 <p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2025</copyright></p>
