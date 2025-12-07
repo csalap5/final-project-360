@@ -15,12 +15,29 @@ if (!isset($_FILES['upload-file']) || $_FILES['upload-file']['error'] !== UPLOAD
 
 $tmpPath = $_FILES['upload-file']['tmp_name'];
 
+
 // DB connection
 $password = $_SESSION['admin']['password'] ?? '';
 $db = new mysqli("127.0.0.1", "uMoviesAdmin", $password, "uMovies");
 if ($db->connect_errno) die("DB connection failed.");
+$db->set_charset('utf8mb4'); // Ensure DB uses UTF-8
 
-$lines = file($tmpPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+$lines = [];
+$file = fopen($tmpPath, "r");
+if ($file) {
+    while (($line = fgets($file)) !== false) {
+        $line = trim($line);
+        if ($line !== "") {
+            // Only convert if not valid UTF-8
+            if (!mb_check_encoding($line, 'UTF-8')) {
+                $lines[] = mb_convert_encoding($line, 'UTF-8', 'ISO-8859-1');
+            } else {
+                $lines[] = $line;
+            }
+        }
+    }
+    fclose($file);
+}
 
 // Counters for results page
 $movieAdd = $actorAdd = $directorAdd = $directionAdd = $performanceAdd = 0;
@@ -83,6 +100,7 @@ foreach ($lines as $line) {
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>uMovies :: Administration</title>
 <style>@import url("uMovies.css");</style>
 </head>
