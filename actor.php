@@ -45,38 +45,18 @@ else {
     }
     else {
         $actor = $result->fetch_assoc();
+        echo "<h3><span class=\"uTitle\">".$actor['name']."</span></h3>";
+        echo "<strong>Gender: </strong>".$actor['gender']."<br>";
 
-        echo "<h3><span class=\"uTitle\">".$movie['name']."</span> (".$movie['year'].")</h3>";
-        echo "<strong>Directed by: </strong>";
-
-        $select = 'select * from directed_by where movie="'.$movie['name'].'"';
-        $result = $moviesdb->query( $select );
-        $rows   = $result->num_rows;
-
-        if ($rows == 0) {
-            echo "<em>No director listed</em>";
-        }
-        else {
-            echo "<span class=\"uDirector\">";
-            for ($i=$rows; $i>0; $i--) {
-                $directedBy = $result->fetch_assoc();
-                echo "<a href=\"director.php?name=".$directedBy['director']."\">".$directedBy['director']."</a>";
-                if ($i>1) {
-                    echo ", ";
-                }
-            }
-            echo "</span><br />";
-        }
-
-        echo "<strong>Cast:</strong><br />";
+        echo "<strong>Filmography:</strong><br />";
         echo "<table class=\"uMovies\">\n";
         echo "<tr>\n";
         echo "<th></th>";
-        echo "<th><a href=\"movie.php?name=".$movie['name']."&order=name\">Name</a></th>";
-        echo "<th><a href=\"movie.php?name=".$movie['name']."&order=role\">Role</a></th>";
+        echo "<th><a href=\"actor.php?name=".$actor['name']."&order=movie\">Movie</a></th>";
+        echo "<th><a href=\"actor.php?name=".$actor['name']."&order=role\">Role</a></th>";
         echo "<tr>\n";
 
-        $select = 'select * from performed_in where movie="'.$movie['name'].'"';
+        $select = 'select * from performed_in where actor="'.$actor['name'].'"';
         switch (@$_GET['order']) {
             case 'movie':
             case 'role': $select .= ' order by '.$_GET['order'];
@@ -94,7 +74,7 @@ else {
                 $row = $result->fetch_assoc();
                 echo "<tr class=\"highlight\">";
                 echo "<td>".($i+1)."</td>";
-                echo "<td><a href=\"actor.php?name=".$row['actor']."\" />".$row['actor']."</a></td>";
+                echo "<td><a href=\"actor.php?name=".$row['actor']."\" />".$row['movie']."</a></td>";
                 echo "<td>".$row['role']."</td>";
                 echo "</tr>\n";
             }
