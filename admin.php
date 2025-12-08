@@ -82,6 +82,8 @@ if (!isset($_SESSION['admin']['loggedin']) || $_SESSION['admin']['loggedin'] !==
         if ($db->connect_errno) throw new Exception("Database connection failed");
     } catch (Exception $e) {
         echo "<h3 style='color:black;'>Invalid administrator password.</h3>";
+        echo "<button type='button' style='cursor: pointer;' onclick='window.location.href=\"admin.php\";'>Back to Login</button>";
+        echo "<p><copyright>Carter Salapka & Kevin Farnsworth &copy; 2025</copyright></p></div>";
         echo "</div></body></html>";
         exit();
     }
@@ -121,7 +123,14 @@ else {
         onchange="copyFileNameToTextInput()"
         style="display: none;"
     >
-    <button type="submit" style="cursor: pointer;">Upload</button>
+    <button type="submit" style="cursor: pointer;" onclick="
+        var name = document.getElementById('movie-file-name').value.trim();
+        if (!name) {
+            alert('Please enter a file name before uploading.');
+            return false;
+        }
+        return confirm('Are you sure you want to upload ' + name + '?');
+    ">Upload</button>
 </form>
 
 <h3>Delete All Movie Information</h3>

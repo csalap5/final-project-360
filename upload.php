@@ -121,13 +121,11 @@ Welcome to <em>uMovies</em>, your destination for information on <a href="movies
 <h3>Uploading Data File</h3>
 
 <ul>
-    <li>Added <?= $movieAdd ?> movies out of <?= $movieTotal ?> movie records (<?= $movieTotal - $movieAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($movie)) ?>]</li>
-    <li>Added <?= $actorAdd ?> actors out of <?= $actorTotal ?> actor records (<?= $actorTotal - $actorAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($name)) ?>]</li>
-    <li>Added <?= $directorAdd ?> directors out of <?= $directorTotal ?> director records (<?= $directorTotal - $directorAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($dname)) ?>]</li>
-    <li>Added <?= $directionAdd ?> directions out of <?= $directorTotal ?> movie/director records (<?= $directorTotal - $directionAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($movie)) ?>
-    /<?= htmlspecialchars(rtrim($dname)) ?>]</li>
-    <li>Added <?= $performanceAdd ?> performances out of <?= $actorTotal ?> actor/movie/role records (<?= $actorTotal - $performanceAdd ?> failures)[Last added:<?= htmlspecialchars(rtrim($movie)) ?>
-    /<?=htmlspecialchars(rtrim($name))?>/<?= htmlspecialchars(rtrim($role)) ?>]</li>
+    <li>Added <?= $movieAdd ?> movies out of <?= $movieTotal ?> movie records (<?= $movieTotal - $movieAdd ?> failures)[Last added:<em><?= $movieAdd > 0 ? htmlspecialchars(rtrim($movie)) : '' ?></em>]</li>
+    <li>Added <?= $actorAdd ?> actors out of <?= $actorTotal ?> actor records (<?= $actorTotal - $actorAdd ?> failures)[Last added:<em><?= $actorAdd > 0 ? htmlspecialchars(rtrim($name)) : '' ?></em>]</li>
+    <li>Added <?= $directorAdd ?> directors out of <?= $directorTotal ?> director records (<?= $directorTotal - $directorAdd ?> failures)[Last added:<em><?= $directorAdd > 0 ? htmlspecialchars(rtrim($dname)) : '' ?></em>]</li>
+    <li>Added <?= $directionAdd ?> directions out of <?= $directorTotal ?> movie/director records (<?= $directorTotal - $directionAdd ?> failures)[Last added:<em><?= $directionAdd > 0 ? htmlspecialchars(rtrim($movie)) . '</em>/<em>' . htmlspecialchars(rtrim($dname)) : '' ?></em>]</li>
+    <li>Added <?= $performanceAdd ?> performances out of <?= $actorTotal ?> actor/movie/role records (<?= $actorTotal - $performanceAdd ?> failures)[Last added:<em><?= $performanceAdd > 0 ? htmlspecialchars(rtrim($movie)) . '</em>/<em>' . htmlspecialchars(rtrim($name)) . '</em>/<em>' . htmlspecialchars(rtrim($role)) : '' ?></em>]</li>
 </ul>
 
 <form action="admin.php" method="get">
