@@ -25,6 +25,13 @@ Welcome to <em>uMovies</em>, your destination for information on <a href="movies
 
 <p>
 <?php
+function formatName($name) {
+    if (strpos($name, ',') === false) return $name;
+    $parts = explode(',', $name); 
+    $last  = trim($parts[0]);     
+    $first = trim($parts[1]);       
+    return $first . ' ' . $last;   
+}
 @$moviesdb = new mysqli('127.0.0.1','uMoviesUser','anonymous','uMovies');
 @$moviesdb->set_charset("utf8");
 
@@ -45,9 +52,8 @@ else {
     }
     else {
         $director = $result->fetch_assoc();
-
-        echo "<h3><span class=\"uTitle\">".$director['name']."</span></h3>";
-
+        $formattedDirector = formatName($director['name']);
+        echo "<h3><span class=\"uTitle\">".$formattedDirector."</span></h3>";
         echo "<strong>Filmography:</strong><br />";
         echo "<table class=\"uMovies\">\n";
         echo "<tr>\n";

@@ -25,6 +25,13 @@ Welcome to <em>uMovies</em>, your destination for information on <a href="movies
 
 <p>
 <?php
+function formatName($name) {
+    if (strpos($name, ',') === false) return $name;
+    $parts = explode(',', $name);  
+    $last  = trim($parts[0]);     
+    $first = trim($parts[1]);       
+    return $first . ' ' . $last;   
+}
 @$actorsdb = new mysqli( '127.0.0.1','uMoviesUser','anonymous','uMovies');
 @$actorsdb->set_charset("utf8");
 
@@ -58,7 +65,8 @@ else {
     $row = $result->fetch_assoc();
     echo "<tr class=\"highlight\">";
     echo "<td>".($i+1)."</td>";
-    echo "<td><a href=\"actor.php?name=".urlencode($row['name'])."\">".$row['name']."</a></td>";
+    $formattedName = formatName($row['name']);
+    echo "<td><a href=\"actor.php?name=".urlencode($row['name'])."\">".$formattedName."</a></td>";
     echo "<td>".$row['gender']."</td>";
     echo "</tr>\n";
 }
