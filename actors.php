@@ -42,7 +42,8 @@ else {
     $select = 'select * from actors';
 
     switch (@$_GET['order']) {
-        case 'name':
+        case 'name':  $select .= ' order by trim(substring_index(name, ",", -1))';
+        break;
         case 'gender': $select .= ' order by '.$_GET['order'];
     }
 

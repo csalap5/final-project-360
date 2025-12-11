@@ -86,7 +86,7 @@ else {
 
         $select = 'select * from performed_in where movie="'.$movie['name'].'"';
         switch (@$_GET['order']) {
-            case 'name': $select .= ' order by actor';
+            case 'name': $select .= ' order by trim(substring_index(actor, ",", -1))';
             break;
             case 'role': $select .= ' order by role';
         }

@@ -66,7 +66,7 @@ else {
 
         $select = 'select * from performed_in where actor="'.$actor['name'].'"';
         switch (@$_GET['order']) {
-            case 'movie':
+            case 'movie': 
             case 'role': $select .= ' order by '.$_GET['order'];
         }
         $result = $moviesdb->query( $select );
