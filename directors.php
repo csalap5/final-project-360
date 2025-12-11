@@ -41,7 +41,9 @@ if ($directorsdb->connect_errno) {
 else {
     $select = 'select distinct name from directors';
     switch (@$_GET['order']) {
-        case 'name': $select .= ' order by '.$_GET['order'];
+        case 'name':
+            $select .= ' order by trim(substring_index(name, ",", -1))';
+            break;
     }
 
     $result = $directorsdb->query( $select );
