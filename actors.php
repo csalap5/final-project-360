@@ -39,7 +39,7 @@ if ($actorsdb->connect_errno) {
     echo '<h3>Database Access Error!</h3>';
 }
 else {
-    $select = 'select * from actors';
+    $select = 'select distinct name,gender from actors';
 
     switch (@$_GET['order']) {
         case 'name':  $select .= ' order by trim(substring_index(name, ",", -1))';

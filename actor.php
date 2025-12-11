@@ -64,7 +64,7 @@ else {
         echo "<th><a href=\"actor.php?name=".$actor['name']."&order=role\">Role</a></th>";
         echo "<tr>\n";
 
-        $select = 'select * from performed_in where actor="'.$actor['name'].'"';
+        $select = 'select distinct movie,role from performed_in where actor="'.$actor['name'].'"';
         switch (@$_GET['order']) {
             case 'movie': 
             case 'role': $select .= ' order by '.$_GET['order'];

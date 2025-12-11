@@ -61,7 +61,7 @@ else {
         echo "<th>Name</th>";
         echo "<tr>\n";
 
-        $select = 'select * from directed_by where director="'.$director['name'].'"';
+        $select = 'select distinct movie from directed_by where director="'.$director['name'].'"';
         switch (@$_GET['order']) {
             case 'movie': $select .= ' order by '.$_GET['order'];
         }

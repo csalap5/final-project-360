@@ -56,7 +56,7 @@ else {
         echo "<h3><span class=\"uTitle\">".$movie['name']."</span> (".$movie['year'].")</h3>";
         echo "<strong>Directed by: </strong>";
 
-        $select = 'select * from directed_by where movie="'.$movie['name'].'"';
+        $select = 'select distinct director from directed_by where movie="'.$movie['name'].'"';
         $result = $moviesdb->query( $select );
         $rows   = $result->num_rows;
 
@@ -84,7 +84,7 @@ else {
         echo "<th><a href=\"movie.php?name=".$movie['name']."&order=role\">Role</a></th>";
         echo "<tr>\n";
 
-        $select = 'select * from performed_in where movie="'.$movie['name'].'"';
+        $select = 'select distinct actor,role from performed_in where movie="'.$movie['name'].'"';
         switch (@$_GET['order']) {
             case 'name': $select .= ' order by trim(substring_index(actor, ",", -1))';
             break;

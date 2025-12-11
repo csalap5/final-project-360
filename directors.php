@@ -39,7 +39,7 @@ if ($directorsdb->connect_errno) {
     echo '<h3>Database Access Error!</h3>';
 }
 else {
-    $select = 'select * from directors';
+    $select = 'select distinct name from directors';
     switch (@$_GET['order']) {
         case 'name': $select .= ' order by '.$_GET['order'];
     }

@@ -32,7 +32,7 @@ if ($moviesdb->connect_errno) {
     echo '<h3>Database Access Error!</h3>';
 }
 else {
-    $select = 'select * from movies';
+    $select = 'select distinct name,year from movies';
 
     switch (@$_GET['order']) {
         case 'name':
